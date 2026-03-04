@@ -55,7 +55,7 @@ const HeroSection = () => {
             Now in Public Beta
           </motion.div>
 
-          <h1 className="font-display text-[3rem] md:text-[4.2rem] leading-[1.08] font-bold tracking-tight mb-5">
+          <h1 className="font-display text-[2.2rem] sm:text-[3rem] md:text-[4.2rem] leading-[1.08] font-bold tracking-tight mb-5">
             Your brand in the
             <span className="relative mx-2 inline-block">
               <motion.span
@@ -109,7 +109,7 @@ const HeroSection = () => {
           </motion.div>
 
           <motion.div
-            className="flex items-center gap-5 text-sm text-muted-foreground"
+            className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-5 text-sm text-muted-foreground"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
