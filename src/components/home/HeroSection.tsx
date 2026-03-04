@@ -4,6 +4,7 @@ import { ArrowRight, Check, Sparkles } from "lucide-react";
 import { useState, useRef } from "react";
 import DashboardMockup from "./DashboardMockup";
 import TrustedByMarquee from "./TrustedByMarquee";
+import HeroVisual from "./HeroVisual";
 
 const words = ["AI conversation", "LLM responses", "search results"];
 
@@ -38,86 +39,91 @@ const HeroSection = () => {
       <div className="absolute bottom-0 left-[5%] w-60 h-60 bg-coral/5 animated-blob blur-3xl pointer-events-none hidden md:block" style={{ animationDelay: "4s" }} />
 
       <div className="container mx-auto relative z-10">
-        <motion.div
-          className="max-w-2xl"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        >
-          {/* Eyebrow badge */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left column - text & CTA */}
           <motion.div
-            className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/5 px-4 py-1.5 text-sm text-accent font-medium mb-6"
-            initial={{ opacity: 0, scale: 0.9, y: 10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
           >
-            <Sparkles className="h-3.5 w-3.5 animate-pulse-glow" />
-            Now in Public Beta
-          </motion.div>
+            {/* Eyebrow badge */}
+            <motion.div
+              className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/5 px-4 py-1.5 text-sm text-accent font-medium mb-6"
+              initial={{ opacity: 0, scale: 0.9, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+            >
+              <Sparkles className="h-3.5 w-3.5 animate-pulse-glow" />
+              Now in Public Beta
+            </motion.div>
 
-          <h1 className="font-display text-[2.2rem] sm:text-[3rem] md:text-[4.2rem] leading-[1.08] font-bold tracking-tight mb-5">
-            Your brand in the
-            <span className="relative mx-2 inline-block">
-              <motion.span
-                key={wordIndex}
-                className="relative z-10"
-                initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, y: -20, filter: "blur(4px)" }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-              >
-                {words[wordIndex]}
-              </motion.span>
-              <motion.span
-                className="absolute bottom-1 left-0 right-0 h-3 bg-accent/15 -skew-x-2 rounded-sm"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ delay: 0.5, duration: 0.4 }}
-                style={{ transformOrigin: "left" }}
+            <h1 className="font-display text-[2.2rem] sm:text-[3rem] md:text-[4.2rem] leading-[1.08] font-bold tracking-tight mb-5">
+              Your brand in the
+              <span className="relative mx-2 inline-block">
+                <motion.span
+                  key={wordIndex}
+                  className="relative z-10"
+                  initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: -20, filter: "blur(4px)" }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                >
+                  {words[wordIndex]}
+                </motion.span>
+                <motion.span
+                  className="absolute bottom-1 left-0 right-0 h-3 bg-accent/15 -skew-x-2 rounded-sm"
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ delay: 0.5, duration: 0.4 }}
+                  style={{ transformOrigin: "left" }}
+                />
+              </span>
+            </h1>
+
+            <motion.p
+              className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-lg"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+            >
+              See how ChatGPT, Perplexity, and Claude talk about your brand — then optimize to own the narrative.
+            </motion.p>
+
+            {/* URL input */}
+            <motion.div
+              className="flex flex-col sm:flex-row gap-3 mb-4 max-w-lg"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+            >
+              <input
+                type="url"
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+                placeholder="Enter your website URL"
+                className="flex-1 rounded-xl border border-border bg-card px-5 py-3 text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent/40 transition-all"
               />
-            </span>
-          </h1>
+              <Button className="rounded-xl bg-accent text-accent-foreground hover:bg-accent/90 px-6 py-3 whitespace-nowrap shadow-lg shadow-accent/20 group" asChild>
+                <a href="https://app.llmclicks.ai/signup" target="_blank" rel="noopener noreferrer">
+                  Get your free report <ArrowRight className="ml-1.5 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </Button>
+            </motion.div>
 
-          <motion.p
-            className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-lg"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-          >
-            See how ChatGPT, Perplexity, and Claude talk about your brand — then optimize to own the narrative.
-          </motion.p>
-
-          {/* URL input */}
-          <motion.div
-            className="flex flex-col sm:flex-row gap-3 mb-4 max-w-lg"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-          >
-            <input
-              type="url"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-              placeholder="Enter your website URL"
-              className="flex-1 rounded-xl border border-border bg-card px-5 py-3 text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent/40 transition-all"
-            />
-            <Button className="rounded-xl bg-accent text-accent-foreground hover:bg-accent/90 px-6 py-3 whitespace-nowrap shadow-lg shadow-accent/20 group" asChild>
-              <a href="https://app.llmclicks.ai/signup" target="_blank" rel="noopener noreferrer">
-                Get your free report <ArrowRight className="ml-1.5 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </a>
-            </Button>
+            <motion.div
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-5 text-sm text-muted-foreground"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              <span className="flex items-center gap-1.5"><Check className="h-4 w-4 text-accent" /> No credit card required</span>
+              <span className="flex items-center gap-1.5"><Check className="h-4 w-4 text-accent" /> Results in 30 seconds</span>
+            </motion.div>
           </motion.div>
 
-          <motion.div
-            className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-5 text-sm text-muted-foreground"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-          >
-            <span className="flex items-center gap-1.5"><Check className="h-4 w-4 text-accent" /> No credit card required</span>
-            <span className="flex items-center gap-1.5"><Check className="h-4 w-4 text-accent" /> Results in 30 seconds</span>
-          </motion.div>
-        </motion.div>
+          {/* Right column - animated visual */}
+          <HeroVisual />
+        </div>
 
         <DashboardMockup />
         <TrustedByMarquee />
