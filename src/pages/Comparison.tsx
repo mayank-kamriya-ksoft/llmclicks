@@ -338,7 +338,7 @@ const Comparison = () => (
                   Request AI Visibility Audit <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </a>
               </Button>
-              <Button size="lg" variant="outline" className="rounded-xl px-8 border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10" asChild>
+              <Button size="lg" className="rounded-xl px-8 bg-primary-foreground text-navy hover:bg-primary-foreground/90 font-medium" asChild>
                 <a href="https://llmclicks.ai/industry-benchmarks/" target="_blank" rel="noopener noreferrer">
                   Run Competitive Benchmark
                 </a>

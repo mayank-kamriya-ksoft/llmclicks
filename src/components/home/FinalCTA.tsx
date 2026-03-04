@@ -85,8 +85,7 @@ const FinalCTA = () => (
               </Button>
               <Button
                 size="lg"
-                variant="outline"
-                className="rounded-xl px-8 border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 hover:border-primary-foreground/30"
+                className="rounded-xl px-8 bg-primary-foreground text-navy hover:bg-primary-foreground/90 font-medium"
                 asChild
               >
                 <a href="https://calendly.com/llmclicks" target="_blank" rel="noopener noreferrer">
