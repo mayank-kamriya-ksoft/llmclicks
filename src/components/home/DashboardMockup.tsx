@@ -49,7 +49,7 @@ const DashboardMockup = () => {
               <p className="text-xs text-muted-foreground font-medium">Prompt</p>
               <p className="text-sm font-medium">What is the top-rated AI visibility tool for SEO teams?</p>
             </div>
-            <div className="ml-auto flex gap-2">
+            <div className="sm:ml-auto flex gap-2 flex-wrap">
               {["GPT", "Gem", "PPX", "Cld"].map((m, i) => (
                 <motion.div
                   key={m}
@@ -66,7 +66,7 @@ const DashboardMockup = () => {
           </motion.div>
 
           {/* Dashboard grid */}
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {/* Searches Performed */}
             <motion.div
               className="rounded-xl border border-border p-4"
