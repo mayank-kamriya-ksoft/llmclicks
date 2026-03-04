@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
+import { Quote } from "lucide-react";
 
 const testimonials = [
   { name: "Sarah Chen", role: "SEO Director, TechFlow Agency", quote: "LLMClicks showed us exactly what AI was seeing — and what we were missing. Within weeks, we went from invisible to cited right alongside the biggest players." },
@@ -9,8 +10,9 @@ const testimonials = [
 ];
 
 const TestimonialsSection = () => (
-  <section className="section-padding bg-card">
-    <div className="container mx-auto">
+  <section className="section-padding bg-card relative">
+    <div className="absolute inset-0 grain-overlay pointer-events-none" />
+    <div className="container mx-auto relative z-10">
       <motion.div
         className="mb-14"
         initial={{ opacity: 0, y: 20 }}
@@ -26,18 +28,13 @@ const TestimonialsSection = () => (
           <CarouselContent>
             {testimonials.map((t) => (
               <CarouselItem key={t.name}>
-                <div className="rounded-2xl border border-border bg-background p-8 md:p-10">
-                  <p className="text-lg md:text-xl leading-relaxed mb-8">
-                    "{t.quote.split("**").length > 1 ? (
-                      <>
-                        {t.quote.split("**")[0]}
-                        <strong>{t.quote.split("**")[1]}</strong>
-                        {t.quote.split("**")[2] || ""}
-                      </>
-                    ) : t.quote}"
+                <div className="rounded-2xl border border-border bg-background p-8 md:p-10 relative">
+                  <Quote className="h-8 w-8 text-accent/20 mb-4" />
+                  <p className="text-lg md:text-xl leading-relaxed mb-8 text-foreground">
+                    "{t.quote}"
                   </p>
                   <div className="flex items-center gap-4">
-                    <div className="h-11 w-11 rounded-full bg-secondary flex items-center justify-center text-sm font-bold text-muted-foreground">
+                    <div className="h-11 w-11 rounded-full bg-accent/10 flex items-center justify-center text-sm font-bold text-accent">
                       {t.name.split(" ").map(n => n[0]).join("")}
                     </div>
                     <div>
@@ -49,8 +46,8 @@ const TestimonialsSection = () => (
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="bg-card border-border" />
-          <CarouselNext className="bg-card border-border" />
+          <CarouselPrevious className="bg-card border-border hover:bg-accent/5 hover:border-accent/20" />
+          <CarouselNext className="bg-card border-border hover:bg-accent/5 hover:border-accent/20" />
         </Carousel>
       </div>
     </div>

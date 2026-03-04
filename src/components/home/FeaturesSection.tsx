@@ -41,8 +41,9 @@ const features = [
 ];
 
 const FeaturesSection = () => (
-  <section className="section-padding bg-card">
-    <div className="container mx-auto">
+  <section className="section-padding bg-card relative">
+    <div className="absolute inset-0 grain-overlay pointer-events-none" />
+    <div className="container mx-auto relative z-10">
       <motion.div
         className="mb-14"
         initial={{ opacity: 0, y: 20 }}
@@ -66,16 +67,21 @@ const FeaturesSection = () => (
             transition={{ duration: 0.5 }}
           >
             <div className="flex-1 rounded-2xl border border-border bg-background p-8 flex flex-col justify-center">
-              <div className="tag-pill mb-4 w-fit">{f.tag}</div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="h-9 w-9 rounded-xl bg-accent/10 flex items-center justify-center">
+                  <f.icon className="h-4.5 w-4.5 text-accent" />
+                </div>
+                <div className="tag-pill">{f.tag}</div>
+              </div>
               <h3 className="font-display text-2xl font-bold mb-3">{f.title}</h3>
               <p className="text-muted-foreground leading-relaxed mb-5">{f.desc}</p>
               <div className="flex flex-wrap gap-2">
                 {f.metrics.map((m) => (
-                  <span key={m} className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-muted-foreground">{m}</span>
+                  <span key={m} className="rounded-full bg-accent/5 border border-accent/10 px-3 py-1 text-xs font-medium text-accent">{m}</span>
                 ))}
               </div>
             </div>
-            <div className="flex-1 rounded-2xl border border-border overflow-hidden min-h-[260px]">
+            <div className="flex-1 rounded-2xl border border-border overflow-hidden min-h-[260px] gradient-border">
               <img
                 src={f.image}
                 alt={`${f.title} dashboard mockup`}

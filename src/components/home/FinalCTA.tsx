@@ -17,12 +17,12 @@ const FinalCTA = () => (
           Join hundreds of marketers already optimizing their AI visibility. Start free today.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <Button size="lg" className="rounded-full bg-foreground text-background hover:bg-foreground/90 px-8" asChild>
+          <Button size="lg" className="rounded-xl bg-accent text-accent-foreground hover:bg-accent/90 px-8 shadow-lg shadow-accent/20" asChild>
             <a href="https://app.llmclicks.ai/signup" target="_blank" rel="noopener noreferrer">
               Start for free <ArrowRight className="ml-2 h-4 w-4" />
             </a>
           </Button>
-          <Button size="lg" variant="outline" className="rounded-full px-8" asChild>
+          <Button size="lg" variant="outline" className="rounded-xl px-8 border-border hover:border-accent/20 hover:bg-accent/5" asChild>
             <a href="https://calendly.com/llmclicks" target="_blank" rel="noopener noreferrer">
               Book a demo
             </a>

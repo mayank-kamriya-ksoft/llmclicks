@@ -36,11 +36,11 @@ const Navbar = () => {
   const location = useLocation();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link to="/" className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-lg bg-foreground flex items-center justify-center">
-            <span className="text-xs font-bold text-background">L</span>
+        <Link to="/" className="flex items-center gap-2.5">
+          <div className="h-8 w-8 rounded-lg bg-accent flex items-center justify-center">
+            <span className="text-xs font-bold text-accent-foreground">L</span>
           </div>
           <span className="font-display text-lg font-bold">LLMClicks</span>
         </Link>
@@ -58,7 +58,7 @@ const Navbar = () => {
                 to={link.to}
                 className={cn(
                   "flex items-center gap-1 px-3 py-2 text-sm transition-colors rounded-lg",
-                  location.pathname === link.to ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground"
+                  location.pathname === link.to ? "text-accent font-medium" : "text-muted-foreground hover:text-foreground"
                 )}
                 onClick={(e) => link.dropdown && e.preventDefault()}
               >
@@ -67,12 +67,12 @@ const Navbar = () => {
               </Link>
               {link.dropdown && openDropdown === link.label && (
                 <div className="absolute left-0 top-full pt-2">
-                  <div className="min-w-[220px] rounded-xl bg-card border border-border p-1.5 shadow-lg">
+                  <div className="min-w-[220px] rounded-xl bg-card border border-border p-1.5 shadow-xl">
                     {link.dropdown.map((item) => (
                       <Link
                         key={item.to}
                         to={item.to}
-                        className="block rounded-lg px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+                        className="block rounded-lg px-3 py-2 text-sm text-muted-foreground hover:text-accent hover:bg-accent/5 transition-colors"
                       >
                         {item.label}
                       </Link>
@@ -88,10 +88,10 @@ const Navbar = () => {
           <Button variant="ghost" size="sm" className="text-sm" asChild>
             <a href="https://app.llmclicks.ai" target="_blank" rel="noopener noreferrer">Log in</a>
           </Button>
-          <Button size="sm" className="rounded-full px-5 bg-foreground text-background hover:bg-foreground/90" asChild>
+          <Button size="sm" className="rounded-xl px-5 bg-accent text-accent-foreground hover:bg-accent/90 shadow-sm shadow-accent/20" asChild>
             <a href="https://app.llmclicks.ai/signup" target="_blank" rel="noopener noreferrer">Start free trial</a>
           </Button>
-          <Button size="sm" variant="outline" className="rounded-full px-5" asChild>
+          <Button size="sm" variant="outline" className="rounded-xl px-5 hover:border-accent/20 hover:bg-accent/5" asChild>
             <a href="https://calendly.com/llmclicks" target="_blank" rel="noopener noreferrer">Book a demo</a>
           </Button>
         </div>
@@ -109,7 +109,7 @@ const Navbar = () => {
                 {link.dropdown ? (
                   <>
                     <button
-                      className="flex w-full items-center justify-between py-2.5 px-3 text-sm text-muted-foreground rounded-lg hover:bg-secondary"
+                      className="flex w-full items-center justify-between py-2.5 px-3 text-sm text-muted-foreground rounded-lg hover:bg-accent/5"
                       onClick={() => setOpenDropdown(openDropdown === link.label ? null : link.label)}
                     >
                       {link.label}
@@ -118,7 +118,7 @@ const Navbar = () => {
                     {openDropdown === link.label && (
                       <div className="ml-3 space-y-0.5">
                         {link.dropdown.map((item) => (
-                          <Link key={item.to} to={item.to} className="block py-2 px-3 text-sm text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>
+                          <Link key={item.to} to={item.to} className="block py-2 px-3 text-sm text-muted-foreground hover:text-accent" onClick={() => setMobileOpen(false)}>
                             {item.label}
                           </Link>
                         ))}
@@ -126,17 +126,17 @@ const Navbar = () => {
                     )}
                   </>
                 ) : (
-                  <Link to={link.to} className="block py-2.5 px-3 text-sm text-muted-foreground hover:text-foreground rounded-lg hover:bg-secondary" onClick={() => setMobileOpen(false)}>
+                  <Link to={link.to} className="block py-2.5 px-3 text-sm text-muted-foreground hover:text-foreground rounded-lg hover:bg-accent/5" onClick={() => setMobileOpen(false)}>
                     {link.label}
                   </Link>
                 )}
               </div>
             ))}
             <div className="pt-3 space-y-2">
-              <Button className="w-full rounded-full bg-foreground text-background hover:bg-foreground/90" asChild>
+              <Button className="w-full rounded-xl bg-accent text-accent-foreground hover:bg-accent/90" asChild>
                 <a href="https://app.llmclicks.ai/signup" target="_blank" rel="noopener noreferrer">Start free trial</a>
               </Button>
-              <Button variant="outline" className="w-full rounded-full" asChild>
+              <Button variant="outline" className="w-full rounded-xl hover:border-accent/20" asChild>
                 <a href="https://calendly.com/llmclicks" target="_blank" rel="noopener noreferrer">Book a demo</a>
               </Button>
             </div>

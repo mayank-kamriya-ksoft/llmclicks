@@ -1,7 +1,7 @@
 import Layout from "@/components/layout/Layout";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, Sparkles } from "lucide-react";
 import { useParams } from "react-router-dom";
 
 const featureData: Record<string, { title: string; tag: string; desc: string; details: string[] }> = {
@@ -44,7 +44,8 @@ const FeaturePage = () => {
   return (
     <Layout>
       <section className="section-padding pt-28 md:pt-36 relative overflow-hidden">
-        <div className="absolute -top-32 -right-32 w-[500px] h-[500px] accent-blob opacity-50 pointer-events-none" />
+        <div className="absolute inset-0 accent-mesh pointer-events-none opacity-50" />
+        <div className="absolute inset-0 grain-overlay pointer-events-none" />
         <div className="container mx-auto max-w-4xl relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-14">
             <div className="tag-pill mb-4">{feature.tag}</div>
@@ -52,21 +53,24 @@ const FeaturePage = () => {
             <p className="text-lg text-muted-foreground max-w-xl">{feature.desc}</p>
           </motion.div>
 
-          <motion.div className="rounded-2xl border border-border bg-secondary/30 aspect-video mb-12 flex items-center justify-center" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
-            <p className="text-muted-foreground font-display">Feature Preview</p>
+          <motion.div className="rounded-2xl border border-border bg-card aspect-video mb-12 flex items-center justify-center gradient-border" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+            <div className="text-center">
+              <Sparkles className="h-8 w-8 text-accent/30 mx-auto mb-2" />
+              <p className="text-muted-foreground font-display">Feature Preview</p>
+            </div>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-4 mb-14">
             {feature.details.map((d, i) => (
-              <motion.div key={i} className="rounded-2xl border border-border bg-card p-6 flex items-start gap-3" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 + i * 0.08 }}>
-                <Check className="h-5 w-5 text-lime mt-0.5 shrink-0" />
+              <motion.div key={i} className="rounded-2xl border border-border bg-card p-6 flex items-start gap-3 hover:border-accent/20 transition-all" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 + i * 0.08 }}>
+                <Check className="h-5 w-5 text-accent mt-0.5 shrink-0" />
                 <p className="text-muted-foreground">{d}</p>
               </motion.div>
             ))}
           </div>
 
           <div className="text-center">
-            <Button size="lg" className="rounded-full bg-foreground text-background hover:bg-foreground/90 px-8" asChild>
+            <Button size="lg" className="rounded-xl bg-accent text-accent-foreground hover:bg-accent/90 px-8 shadow-lg shadow-accent/20" asChild>
               <a href="https://app.llmclicks.ai/signup" target="_blank" rel="noopener noreferrer">
                 Try {feature.title} Free <ArrowRight className="ml-2 h-4 w-4" />
               </a>

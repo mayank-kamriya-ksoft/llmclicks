@@ -30,13 +30,14 @@ const cols = [
 ];
 
 const Footer = () => (
-  <footer className="border-t border-border">
-    <div className="container mx-auto px-4 py-16">
+  <footer className="border-t border-border relative">
+    <div className="absolute inset-0 grain-overlay pointer-events-none" />
+    <div className="container mx-auto px-4 py-16 relative z-10">
       <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
         <div className="lg:col-span-2">
-          <div className="flex items-center gap-2 mb-4">
-            <div className="h-8 w-8 rounded-lg bg-foreground flex items-center justify-center">
-              <span className="text-xs font-bold text-background">L</span>
+          <div className="flex items-center gap-2.5 mb-4">
+            <div className="h-8 w-8 rounded-lg bg-accent flex items-center justify-center">
+              <span className="text-xs font-bold text-accent-foreground">L</span>
             </div>
             <span className="font-display text-lg font-bold">LLMClicks</span>
           </div>
@@ -51,7 +52,7 @@ const Footer = () => (
             <ul className="space-y-2.5">
               {col.links.map((l) => (
                 <li key={l.to}>
-                  <Link to={l.to} className="text-sm text-muted-foreground hover:text-foreground transition-colors">{l.label}</Link>
+                  <Link to={l.to} className="text-sm text-muted-foreground hover:text-accent transition-colors">{l.label}</Link>
                 </li>
               ))}
             </ul>
@@ -62,8 +63,8 @@ const Footer = () => (
       <div className="mt-14 pt-6 border-t border-border flex flex-col md:flex-row items-center justify-between gap-3">
         <p className="text-xs text-muted-foreground">&copy; {new Date().getFullYear()} LLMClicks.ai. All rights reserved.</p>
         <div className="flex gap-5 text-xs text-muted-foreground">
-          <span className="hover:text-foreground cursor-pointer transition-colors">Privacy</span>
-          <span className="hover:text-foreground cursor-pointer transition-colors">Terms</span>
+          <span className="hover:text-accent cursor-pointer transition-colors">Privacy</span>
+          <span className="hover:text-accent cursor-pointer transition-colors">Terms</span>
         </div>
       </div>
     </div>
