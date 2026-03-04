@@ -1,39 +1,120 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 const FinalCTA = () => (
-  <section className="section-padding relative overflow-hidden">
-    {/* Animated background blobs */}
-    <motion.div
-      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none bg-accent/8"
-      animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.6, 0.3] }}
-      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-    />
-    <div className="container mx-auto text-center max-w-2xl relative z-10">
+  <section className="section-padding">
+    <div className="container mx-auto">
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        className="rounded-3xl p-10 md:p-16 lg:p-20 relative overflow-hidden"
+        style={{
+          background:
+            "linear-gradient(145deg, hsl(var(--navy)) 0%, hsl(220 28% 14%) 40%, hsl(180 20% 12%) 100%)",
+        }}
+        initial={{ opacity: 0, y: 40, scale: 0.97 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
-        <h2 className="font-display text-3xl md:text-5xl font-bold mb-5">
-          Ready to see how AI views your brand?
-        </h2>
-        <p className="text-muted-foreground text-lg mb-10">
-          Join hundreds of marketers already optimizing their AI visibility. Start free today.
-        </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <Button size="lg" className="rounded-xl bg-accent text-accent-foreground hover:bg-accent/90 px-8 shadow-lg shadow-accent/20 group" asChild>
-            <a href="https://app.llmclicks.ai/signup" target="_blank" rel="noopener noreferrer">
-              Start for free <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </a>
-          </Button>
-          <Button size="lg" variant="outline" className="rounded-xl px-8 border-border hover:border-accent/20 hover:bg-accent/5" asChild>
-            <a href="https://calendly.com/llmclicks" target="_blank" rel="noopener noreferrer">
-              Book a demo
-            </a>
-          </Button>
+        {/* Ambient glow blobs */}
+        <motion.div
+          className="absolute -top-20 -right-20 w-96 h-96 rounded-full blur-[120px] pointer-events-none"
+          style={{ background: "hsl(var(--accent) / 0.12)" }}
+          animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.7, 0.4] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute -bottom-16 -left-16 w-72 h-72 rounded-full blur-[100px] pointer-events-none"
+          style={{ background: "hsl(var(--coral) / 0.08)" }}
+          animate={{ scale: [1, 1.1, 1], x: [0, 15, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {/* Floating dots */}
+        <div className="absolute top-12 right-[15%] w-3 h-3 rounded-full bg-accent/40 animate-float" />
+        <div className="absolute bottom-20 right-[25%] w-2 h-2 rounded-full bg-coral/25 animate-float-delayed" />
+
+        {/* Content */}
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+          <div className="max-w-lg">
+            <motion.div
+              className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1.5 text-xs text-accent font-medium mb-6"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              <Sparkles className="h-3 w-3 animate-pulse-glow" /> Free Beta Access
+            </motion.div>
+
+            <motion.h2
+              className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-5 text-primary-foreground leading-[1.12]"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+            >
+              Ready to see how AI views your brand?
+            </motion.h2>
+
+            <motion.p
+              className="text-primary-foreground/60 text-lg mb-8 leading-relaxed"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+            >
+              Join hundreds of marketers already optimizing their AI visibility. No credit card required.
+            </motion.p>
+
+            <motion.div
+              className="flex flex-col sm:flex-row items-start gap-3"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+            >
+              <Button
+                size="lg"
+                className="rounded-xl bg-accent text-accent-foreground hover:bg-accent/90 px-8 shadow-lg shadow-accent/25 group"
+                asChild
+              >
+                <a href="https://app.llmclicks.ai/signup" target="_blank" rel="noopener noreferrer">
+                  Get started free <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="rounded-xl px-8 border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 hover:border-primary-foreground/30"
+                asChild
+              >
+                <a href="https://calendly.com/llmclicks" target="_blank" rel="noopener noreferrer">
+                  Book a demo
+                </a>
+              </Button>
+            </motion.div>
+          </div>
+
+          {/* Right side decorative element */}
+          <div className="hidden lg:flex items-center justify-center">
+            <motion.div
+              className="relative w-64 h-64"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.6, type: "spring", stiffness: 120 }}
+            >
+              <div className="absolute inset-0 rounded-full border border-accent/10 animate-spin-slow" />
+              <div className="absolute inset-6 rounded-full border border-accent/15 animate-spin-slow" style={{ animationDirection: "reverse", animationDuration: "25s" }} />
+              <div className="absolute inset-12 rounded-full border border-accent/20 animate-spin-slow" style={{ animationDuration: "35s" }} />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-16 h-16 rounded-2xl bg-accent/15 backdrop-blur-sm flex items-center justify-center border border-accent/20">
+                  <Sparkles className="h-7 w-7 text-accent animate-pulse-glow" />
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </motion.div>
     </div>
