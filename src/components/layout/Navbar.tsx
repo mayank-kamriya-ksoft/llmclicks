@@ -36,17 +36,16 @@ const Navbar = () => {
   const location = useLocation();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/70 backdrop-blur-xl border-b border-border/50">
-      <div className="container mx-auto flex h-18 items-center justify-between px-4 py-3">
-        <Link to="/" className="flex items-center gap-2.5">
-          <div className="h-9 w-9 rounded-xl gradient-bg-primary flex items-center justify-center">
-            <span className="text-sm font-bold text-primary-foreground">L</span>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+        <Link to="/" className="flex items-center gap-2">
+          <div className="h-8 w-8 rounded-lg bg-foreground flex items-center justify-center">
+            <span className="text-xs font-bold text-background">L</span>
           </div>
-          <span className="font-display text-xl font-bold text-foreground">
-            LLMClicks<span className="gradient-text">.ai</span>
-          </span>
+          <span className="font-display text-lg font-bold">LLMClicks</span>
         </Link>
 
+        {/* Desktop */}
         <div className="hidden items-center gap-0.5 lg:flex">
           {navLinks.map((link) => (
             <div
@@ -58,10 +57,8 @@ const Navbar = () => {
               <Link
                 to={link.to}
                 className={cn(
-                  "flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-all",
-                  location.pathname === link.to
-                    ? "text-primary bg-primary/5"
-                    : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+                  "flex items-center gap-1 px-3 py-2 text-sm transition-colors rounded-lg",
+                  location.pathname === link.to ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground"
                 )}
                 onClick={(e) => link.dropdown && e.preventDefault()}
               >
@@ -70,12 +67,12 @@ const Navbar = () => {
               </Link>
               {link.dropdown && openDropdown === link.label && (
                 <div className="absolute left-0 top-full pt-2">
-                  <div className="min-w-[240px] rounded-2xl bg-card border border-border p-2 shadow-lg shadow-primary/5">
+                  <div className="min-w-[220px] rounded-xl bg-card border border-border p-1.5 shadow-lg">
                     {link.dropdown.map((item) => (
                       <Link
                         key={item.to}
                         to={item.to}
-                        className="block rounded-xl px-4 py-2.5 text-sm text-muted-foreground transition-all hover:bg-secondary hover:text-foreground"
+                        className="block rounded-lg px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
                       >
                         {item.label}
                       </Link>
@@ -87,43 +84,41 @@ const Navbar = () => {
           ))}
         </div>
 
-        <div className="hidden lg:flex items-center gap-3">
-          <Button variant="ghost" className="rounded-full" asChild>
+        <div className="hidden lg:flex items-center gap-2">
+          <Button variant="ghost" size="sm" className="text-sm" asChild>
             <a href="https://app.llmclicks.ai" target="_blank" rel="noopener noreferrer">Log in</a>
           </Button>
-          <Button className="rounded-full gradient-bg-primary border-0 shadow-lg shadow-primary/25 px-6" asChild>
-            <a href="https://app.llmclicks.ai/signup" target="_blank" rel="noopener noreferrer">Get Started Free</a>
+          <Button size="sm" className="rounded-full px-5 bg-foreground text-background hover:bg-foreground/90" asChild>
+            <a href="https://app.llmclicks.ai/signup" target="_blank" rel="noopener noreferrer">Start free trial</a>
+          </Button>
+          <Button size="sm" variant="outline" className="rounded-full px-5" asChild>
+            <a href="https://calendly.com/llmclicks" target="_blank" rel="noopener noreferrer">Book a demo</a>
           </Button>
         </div>
 
-        <button className="lg:hidden text-foreground p-2 rounded-xl hover:bg-secondary" onClick={() => setMobileOpen(!mobileOpen)}>
+        <button className="lg:hidden p-2" onClick={() => setMobileOpen(!mobileOpen)}>
           {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
       {mobileOpen && (
-        <div className="border-t border-border/50 bg-card lg:hidden">
-          <div className="container mx-auto px-4 py-6 space-y-1">
+        <div className="border-t border-border bg-card lg:hidden">
+          <div className="container mx-auto px-4 py-4 space-y-1">
             {navLinks.map((link) => (
               <div key={link.label}>
                 {link.dropdown ? (
                   <>
                     <button
-                      className="flex w-full items-center justify-between rounded-xl py-2.5 px-3 text-sm font-medium text-muted-foreground hover:bg-secondary"
+                      className="flex w-full items-center justify-between py-2.5 px-3 text-sm text-muted-foreground rounded-lg hover:bg-secondary"
                       onClick={() => setOpenDropdown(openDropdown === link.label ? null : link.label)}
                     >
                       {link.label}
                       <ChevronDown className={cn("h-4 w-4 transition-transform", openDropdown === link.label && "rotate-180")} />
                     </button>
                     {openDropdown === link.label && (
-                      <div className="ml-4 space-y-0.5 mt-1">
+                      <div className="ml-3 space-y-0.5">
                         {link.dropdown.map((item) => (
-                          <Link
-                            key={item.to}
-                            to={item.to}
-                            className="block rounded-lg py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5"
-                            onClick={() => setMobileOpen(false)}
-                          >
+                          <Link key={item.to} to={item.to} className="block py-2 px-3 text-sm text-muted-foreground hover:text-foreground" onClick={() => setMobileOpen(false)}>
                             {item.label}
                           </Link>
                         ))}
@@ -131,22 +126,18 @@ const Navbar = () => {
                     )}
                   </>
                 ) : (
-                  <Link
-                    to={link.to}
-                    className="block rounded-xl py-2.5 px-3 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-secondary"
-                    onClick={() => setMobileOpen(false)}
-                  >
+                  <Link to={link.to} className="block py-2.5 px-3 text-sm text-muted-foreground hover:text-foreground rounded-lg hover:bg-secondary" onClick={() => setMobileOpen(false)}>
                     {link.label}
                   </Link>
                 )}
               </div>
             ))}
-            <div className="pt-4 space-y-2">
-              <Button variant="outline" className="w-full rounded-full" asChild>
-                <a href="https://app.llmclicks.ai" target="_blank" rel="noopener noreferrer">Log in</a>
+            <div className="pt-3 space-y-2">
+              <Button className="w-full rounded-full bg-foreground text-background hover:bg-foreground/90" asChild>
+                <a href="https://app.llmclicks.ai/signup" target="_blank" rel="noopener noreferrer">Start free trial</a>
               </Button>
-              <Button className="w-full rounded-full gradient-bg-primary border-0" asChild>
-                <a href="https://app.llmclicks.ai/signup" target="_blank" rel="noopener noreferrer">Get Started Free</a>
+              <Button variant="outline" className="w-full rounded-full" asChild>
+                <a href="https://calendly.com/llmclicks" target="_blank" rel="noopener noreferrer">Book a demo</a>
               </Button>
             </div>
           </div>

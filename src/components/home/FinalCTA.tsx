@@ -4,28 +4,27 @@ import { ArrowRight } from "lucide-react";
 
 const FinalCTA = () => (
   <section className="section-padding">
-    <div className="container mx-auto text-center">
+    <div className="container mx-auto text-center max-w-2xl">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
       >
-        <h2 className="font-display text-4xl md:text-6xl font-extrabold mb-6 max-w-3xl mx-auto leading-tight">
-          Ready to See How AI{" "}
-          <span className="gradient-text">Views Your Brand?</span>
+        <h2 className="font-display text-3xl md:text-5xl font-bold mb-5">
+          Ready to see how AI views your brand?
         </h2>
-        <p className="text-muted-foreground text-lg mb-10 max-w-xl mx-auto">
+        <p className="text-muted-foreground text-lg mb-10">
           Join hundreds of marketers already optimizing their AI visibility. Start free today.
         </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button size="lg" className="rounded-full gradient-bg-primary border-0 text-base px-8 py-6 shadow-lg shadow-primary/25" asChild>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <Button size="lg" className="rounded-full bg-foreground text-background hover:bg-foreground/90 px-8" asChild>
             <a href="https://app.llmclicks.ai/signup" target="_blank" rel="noopener noreferrer">
-              Start for Free <ArrowRight className="ml-2 h-5 w-5" />
+              Start for free <ArrowRight className="ml-2 h-4 w-4" />
             </a>
           </Button>
-          <Button size="lg" variant="outline" className="rounded-full text-base px-8 py-6" asChild>
+          <Button size="lg" variant="outline" className="rounded-full px-8" asChild>
             <a href="https://calendly.com/llmclicks" target="_blank" rel="noopener noreferrer">
-              Book a Demo
+              Book a demo
             </a>
           </Button>
         </div>

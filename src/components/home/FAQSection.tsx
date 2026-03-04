@@ -14,22 +14,20 @@ const FAQSection = () => (
   <section className="section-padding">
     <div className="container mx-auto max-w-3xl">
       <motion.div
-        className="text-center mb-12"
+        className="mb-12"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
       >
-        <div className="highlight-pill mb-4 mx-auto w-fit">FAQ</div>
-        <h2 className="font-display text-3xl md:text-5xl font-extrabold mb-5">
-          Got <span className="gradient-text">Questions?</span>
-        </h2>
+        <div className="tag-pill mb-4">FAQ</div>
+        <h2 className="font-display text-3xl md:text-5xl font-bold">Common questions</h2>
       </motion.div>
 
-      <Accordion type="single" collapsible className="space-y-3">
+      <Accordion type="single" collapsible className="space-y-2">
         {faqs.map((faq, i) => (
-          <AccordionItem key={i} value={`faq-${i}`} className="bold-card border-none px-8">
-            <AccordionTrigger className="text-left font-display font-bold text-lg hover:no-underline py-5">{faq.q}</AccordionTrigger>
-            <AccordionContent className="text-muted-foreground leading-relaxed text-base pb-6">{faq.a}</AccordionContent>
+          <AccordionItem key={i} value={`faq-${i}`} className="rounded-2xl border border-border bg-card px-6 data-[state=open]:shadow-sm transition-shadow">
+            <AccordionTrigger className="text-left font-display font-semibold hover:no-underline py-5 text-base">{faq.q}</AccordionTrigger>
+            <AccordionContent className="text-muted-foreground leading-relaxed pb-5">{faq.a}</AccordionContent>
           </AccordionItem>
         ))}
       </Accordion>
