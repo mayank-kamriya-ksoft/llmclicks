@@ -1,142 +1,191 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles, Zap, Star } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
+import { useState } from "react";
 
-const HeroSection = () => (
-  <section className="relative overflow-hidden pt-28 md:pt-36 pb-20 md:pb-28 px-4">
-    {/* Decorative blobs */}
-    <div className="absolute top-20 -right-20 w-[500px] h-[500px] rounded-full bg-violet/5 blur-[100px] pointer-events-none" />
-    <div className="absolute bottom-0 -left-20 w-[400px] h-[400px] rounded-full bg-coral/5 blur-[100px] pointer-events-none" />
+const HeroSection = () => {
+  const [url, setUrl] = useState("");
 
-    {/* Floating shapes */}
-    <motion.div
-      className="absolute top-32 left-[10%] w-16 h-16 rounded-2xl bg-violet/10 rotate-12 hidden lg:block"
-      animate={{ y: [-10, 10, -10], rotate: [12, -5, 12] }}
-      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-    />
-    <motion.div
-      className="absolute top-48 right-[15%] w-12 h-12 rounded-full bg-coral/15 hidden lg:block"
-      animate={{ y: [10, -15, 10] }}
-      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-    />
-    <motion.div
-      className="absolute bottom-32 left-[20%] w-10 h-10 rounded-xl bg-sky/10 rotate-45 hidden lg:block"
-      animate={{ y: [-8, 12, -8], rotate: [45, 30, 45] }}
-      transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-    />
+  return (
+    <section className="relative overflow-hidden pt-28 md:pt-36 pb-12 px-4">
+      {/* Accent blob - top right */}
+      <div className="absolute -top-32 -right-32 w-[600px] h-[600px] accent-blob opacity-70 pointer-events-none" />
 
-    <div className="container mx-auto relative z-10">
-      <motion.div
-        className="mx-auto max-w-4xl text-center"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-      >
-        <div className="highlight-pill mb-8 mx-auto w-fit">
-          <Sparkles className="h-4 w-4" />
-          Now in Beta — Free to Get Started
-        </div>
-
-        <h1 className="font-display text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold leading-[1.05] tracking-tight mb-8">
-          See How AI{" "}
-          <span className="gradient-text">Really Sees</span>
-          <br />
-          Your Brand
-        </h1>
-
-        <p className="mx-auto max-w-2xl text-lg md:text-xl text-muted-foreground leading-relaxed mb-12">
-          Track, analyze, and optimize your brand's presence across ChatGPT, Gemini, Perplexity, and other AI platforms — all in one dashboard.
-        </p>
-
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button size="lg" className="rounded-full gradient-bg-primary border-0 text-base px-8 py-6 shadow-lg shadow-primary/25" asChild>
-            <a href="https://app.llmclicks.ai/signup" target="_blank" rel="noopener noreferrer">
-              Start for Free <ArrowRight className="ml-2 h-5 w-5" />
-            </a>
-          </Button>
-          <Button size="lg" variant="outline" className="rounded-full text-base px-8 py-6" asChild>
-            <a href="https://calendly.com/llmclicks" target="_blank" rel="noopener noreferrer">
-              Book a Demo
-            </a>
-          </Button>
-        </div>
-
-        {/* Social proof pills */}
+      <div className="container mx-auto relative z-10">
         <motion.div
-          className="mt-14 flex flex-wrap items-center justify-center gap-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
+          className="max-w-2xl"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
         >
-          {[
-            { icon: Zap, label: "500+ Active Users" },
-            { icon: Star, label: "Trusted by Agencies" },
-            { icon: Sparkles, label: "10K+ Audits Run" },
-          ].map((item) => (
-            <div key={item.label} className="flex items-center gap-2 rounded-full bg-secondary px-4 py-2 text-sm text-muted-foreground">
-              <item.icon className="h-4 w-4 text-primary" />
-              {item.label}
-            </div>
-          ))}
-        </motion.div>
-      </motion.div>
+          <h1 className="font-display text-[3.2rem] md:text-[4.5rem] leading-[1.05] font-bold tracking-tight mb-5">
+            Unlock the new way to{" "}
+            <span className="font-extrabold">reach customers</span>
+          </h1>
 
-      {/* Dashboard Preview */}
-      <motion.div
-        className="mx-auto mt-20 max-w-5xl"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3, duration: 0.8 }}
-      >
-        <div className="rounded-3xl bg-card border border-border p-3 shadow-2xl shadow-primary/10">
-          <div className="rounded-2xl gradient-bg-soft aspect-video flex items-center justify-center relative overflow-hidden">
-            {/* Mock dashboard grid */}
-            <div className="absolute inset-6 grid grid-cols-3 grid-rows-2 gap-3 opacity-60">
-              <div className="rounded-xl bg-card/80 border border-border/50 col-span-2 p-4">
-                <div className="h-3 w-24 rounded-full bg-primary/20 mb-3" />
-                <div className="flex gap-2">
-                  {[60, 80, 45, 90, 70, 55, 85].map((h, i) => (
-                    <div key={i} className="flex-1 rounded-t-md bg-primary/30 self-end" style={{ height: `${h}%` }} />
+          <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-lg">
+            See how AI assistants like ChatGPT, Perplexity, and Claude talk about your brand, and what you can do about it.
+          </p>
+
+          {/* URL input */}
+          <div className="flex flex-col sm:flex-row gap-3 mb-4 max-w-lg">
+            <input
+              type="url"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              placeholder="Enter your website URL"
+              className="flex-1 rounded-full border border-border bg-card px-5 py-3 text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-ring"
+            />
+            <Button className="rounded-full bg-foreground text-background hover:bg-foreground/90 px-6 py-3 whitespace-nowrap" asChild>
+              <a href="https://app.llmclicks.ai/signup" target="_blank" rel="noopener noreferrer">
+                Get your free report
+              </a>
+            </Button>
+          </div>
+
+          <div className="flex items-center gap-5 text-sm text-muted-foreground">
+            <span className="flex items-center gap-1.5"><Check className="h-4 w-4 text-lime" /> No credit card required</span>
+            <span className="flex items-center gap-1.5"><Check className="h-4 w-4 text-lime" /> See results in 30 seconds</span>
+          </div>
+        </motion.div>
+
+        {/* Browser-frame dashboard mockup */}
+        <motion.div
+          className="mt-16 max-w-5xl mx-auto"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25, duration: 0.7 }}
+        >
+          <div className="rounded-2xl bg-card border border-border shadow-xl overflow-hidden">
+            {/* Browser chrome */}
+            <div className="flex items-center gap-2 px-4 py-3 bg-secondary/60 border-b border-border">
+              <div className="flex gap-1.5">
+                <div className="w-3 h-3 rounded-full bg-destructive/60" />
+                <div className="w-3 h-3 rounded-full bg-accent" />
+                <div className="w-3 h-3 rounded-full bg-lime" />
+              </div>
+              <div className="flex-1 mx-8">
+                <div className="h-6 rounded-md bg-background border border-border max-w-md mx-auto" />
+              </div>
+            </div>
+
+            {/* Dashboard content */}
+            <div className="p-6 md:p-8 bg-card">
+              {/* Top prompt bar */}
+              <div className="flex items-center gap-4 mb-6 p-4 rounded-xl bg-secondary/40 border border-border">
+                <div className="h-8 w-8 rounded-lg bg-foreground/10 flex items-center justify-center">
+                  <span className="text-xs">✦</span>
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground font-medium">Prompt</p>
+                  <p className="text-sm font-medium">What is the top-rated AI visibility tool for SEO teams?</p>
+                </div>
+                <div className="ml-auto flex gap-2">
+                  {["GPT", "Gem", "PPX", "Cld"].map((m) => (
+                    <div key={m} className="h-7 w-7 rounded-md bg-secondary border border-border flex items-center justify-center text-[9px] font-bold text-muted-foreground">{m}</div>
                   ))}
                 </div>
               </div>
-              <div className="rounded-xl bg-card/80 border border-border/50 p-4">
-                <div className="h-3 w-16 rounded-full bg-coral/20 mb-3" />
-                <div className="h-20 w-20 mx-auto rounded-full border-4 border-coral/30 flex items-center justify-center">
-                  <span className="font-display font-bold text-lg text-foreground/60">87</span>
+
+              {/* Dashboard grid */}
+              <div className="grid grid-cols-3 gap-4">
+                {/* Searches Performed */}
+                <div className="rounded-xl border border-border p-4">
+                  <h4 className="text-xs font-semibold text-muted-foreground mb-3">Searches Performed</h4>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <div className="h-2 flex-1 rounded-full bg-secondary"><div className="h-full w-[78%] rounded-full bg-lime" /></div>
+                      <span className="text-[10px] text-muted-foreground">Yes</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="h-2 flex-1 rounded-full bg-secondary"><div className="h-full w-[22%] rounded-full bg-border" /></div>
+                      <span className="text-[10px] text-muted-foreground">No</span>
+                    </div>
+                  </div>
+                  <div className="mt-4 space-y-1.5">
+                    <p className="text-[10px] font-semibold text-muted-foreground">Top Queries</p>
+                    {["AI visibility tools for SEO...", "Best brand monitoring in AI...", "How to track LLM mentions..."].map((q) => (
+                      <div key={q} className="text-[10px] text-muted-foreground/70 py-1 px-2 rounded bg-secondary/50 truncate">{q}</div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <div className="rounded-xl bg-card/80 border border-border/50 p-4">
-                <div className="h-3 w-20 rounded-full bg-sky/20 mb-3" />
-                <div className="space-y-2">
-                  {[70, 55, 85, 40].map((w, i) => (
-                    <div key={i} className="h-2 rounded-full bg-sky/20" style={{ width: `${w}%` }} />
-                  ))}
-                </div>
-              </div>
-              <div className="rounded-xl bg-card/80 border border-border/50 col-span-2 p-4">
-                <div className="h-3 w-28 rounded-full bg-mint/20 mb-3" />
-                <div className="flex gap-4">
-                  {[
-                    { label: "ChatGPT", pct: 78 },
-                    { label: "Gemini", pct: 65 },
-                    { label: "Perplexity", pct: 92 },
-                  ].map((item) => (
-                    <div key={item.label} className="flex-1 text-center">
-                      <div className="h-2 rounded-full bg-muted mb-1">
-                        <div className="h-full rounded-full bg-mint/40" style={{ width: `${item.pct}%` }} />
-                      </div>
-                      <span className="text-[10px] text-muted-foreground">{item.label}</span>
+
+                {/* Searches Cited */}
+                <div className="rounded-xl border border-border p-4">
+                  <h4 className="text-xs font-semibold text-muted-foreground mb-3">Searches Cited</h4>
+                  <div className="space-y-2 mb-4">
+                    <div className="flex items-center gap-2">
+                      <div className="h-2 flex-1 rounded-full bg-secondary"><div className="h-full w-[65%] rounded-full bg-foreground/30" /></div>
+                      <span className="text-[10px] text-muted-foreground">Yours</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="h-2 flex-1 rounded-full bg-secondary"><div className="h-full w-[45%] rounded-full bg-border" /></div>
+                      <span className="text-[10px] text-muted-foreground">Competitor</span>
+                    </div>
+                  </div>
+                  <p className="text-[10px] font-semibold text-muted-foreground mb-1.5">Top Domains</p>
+                  {["llmclicks.ai", "competitor1.com", "seotools.io"].map((d, i) => (
+                    <div key={d} className="flex items-center gap-2 py-1">
+                      <div className={`w-1.5 h-1.5 rounded-full ${i === 0 ? "bg-lime" : "bg-border"}`} />
+                      <span className="text-[10px] text-muted-foreground">{d}</span>
                     </div>
                   ))}
+                </div>
+
+                {/* Sentiment */}
+                <div className="rounded-xl border border-border p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <h4 className="text-xs font-semibold text-muted-foreground">Sentiment</h4>
+                    <span className="text-[10px] text-muted-foreground">% of total</span>
+                  </div>
+                  <div className="flex items-center justify-center my-4">
+                    <div className="relative w-20 h-20">
+                      <svg viewBox="0 0 36 36" className="w-20 h-20 -rotate-90">
+                        <circle cx="18" cy="18" r="15.5" fill="none" stroke="hsl(var(--border))" strokeWidth="3" />
+                        <circle cx="18" cy="18" r="15.5" fill="none" stroke="hsl(var(--lime))" strokeWidth="3" strokeDasharray="64 36" strokeLinecap="round" />
+                      </svg>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-sm font-bold">64%</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between text-[10px]">
+                      <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-lime" /> Positive</span>
+                      <span className="font-medium">64%</span>
+                    </div>
+                    <div className="flex items-center justify-between text-[10px]">
+                      <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-secondary" /> Mixed</span>
+                      <span className="font-medium">30%</span>
+                    </div>
+                    <div className="flex items-center justify-between text-[10px]">
+                      <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-destructive/40" /> Negative</span>
+                      <span className="font-medium">6%</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </motion.div>
-    </div>
-  </section>
-);
+        </motion.div>
+
+        {/* Trusted by */}
+        <motion.div
+          className="mt-16 text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6 }}
+        >
+          <p className="text-sm font-medium text-muted-foreground mb-5">Trusted by over 500 companies and agencies</p>
+          <div className="flex flex-wrap items-center justify-center gap-8 opacity-40">
+            {["AgencyCo", "MarketFlow", "SEO Labs", "DataBridge", "GrowthPulse", "BrandAI"].map((name) => (
+              <span key={name} className="font-display font-bold text-lg text-foreground">{name}</span>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
 
 export default HeroSection;

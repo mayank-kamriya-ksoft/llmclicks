@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 
 const stats = [
-  { value: 95, suffix: "%", label: "Average Visibility Improvement", color: "bg-violet" },
-  { value: 10000, suffix: "+", label: "Audits Completed", color: "bg-coral" },
-  { value: 500, suffix: "+", label: "Active Users", color: "bg-sky" },
+  { value: 95, suffix: "%", label: "Visibility Improvement" },
+  { value: 10000, suffix: "+", label: "Audits Completed" },
+  { value: 500, suffix: "+", label: "Active Users" },
 ];
 
 const Counter = ({ target, suffix }: { target: number; suffix: string }) => {
@@ -17,19 +17,14 @@ const Counter = ({ target, suffix }: { target: number; suffix: string }) => {
       ([entry]) => {
         if (entry.isIntersecting && !started.current) {
           started.current = true;
-          const duration = 2000;
           const steps = 60;
           const increment = target / steps;
           let current = 0;
           const timer = setInterval(() => {
             current += increment;
-            if (current >= target) {
-              setCount(target);
-              clearInterval(timer);
-            } else {
-              setCount(Math.floor(current));
-            }
-          }, duration / steps);
+            if (current >= target) { setCount(target); clearInterval(timer); }
+            else setCount(Math.floor(current));
+          }, 2000 / steps);
         }
       },
       { threshold: 0.5 }
@@ -39,7 +34,7 @@ const Counter = ({ target, suffix }: { target: number; suffix: string }) => {
   }, [target]);
 
   return (
-    <div ref={ref} className="font-display text-5xl md:text-6xl font-extrabold text-foreground">
+    <div ref={ref} className="font-display text-5xl md:text-6xl font-bold">
       {count.toLocaleString()}{suffix}
     </div>
   );
@@ -52,15 +47,14 @@ const StatsSection = () => (
         {stats.map((stat, i) => (
           <motion.div
             key={stat.label}
-            className="bold-card text-center"
+            className="text-center p-8 rounded-2xl bg-card border border-border"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.15 }}
+            transition={{ delay: i * 0.1 }}
           >
-            <div className={`w-12 h-1.5 rounded-full ${stat.color} mx-auto mb-6 opacity-60`} />
             <Counter target={stat.value} suffix={stat.suffix} />
-            <p className="mt-3 text-muted-foreground font-medium">{stat.label}</p>
+            <p className="mt-2 text-muted-foreground text-sm">{stat.label}</p>
           </motion.div>
         ))}
       </div>

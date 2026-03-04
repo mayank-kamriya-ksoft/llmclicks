@@ -15,41 +15,37 @@ const tools = [
 ];
 
 const CellIcon = ({ val }: { val: boolean | string }) => {
-  if (val === true) return <Check className="h-5 w-5 text-mint mx-auto" />;
-  if (val === "partial") return <Minus className="h-5 w-5 text-peach mx-auto" />;
-  return <X className="h-5 w-5 text-muted-foreground/30 mx-auto" />;
+  if (val === true) return <Check className="h-4 w-4 text-lime mx-auto" />;
+  if (val === "partial") return <Minus className="h-4 w-4 text-muted-foreground mx-auto" />;
+  return <X className="h-4 w-4 text-border mx-auto" />;
 };
 
 const Comparison = () => (
   <Layout>
     <section className="section-padding pt-28 md:pt-36">
       <div className="container mx-auto max-w-5xl">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-16">
-          <div className="highlight-pill mb-4 mx-auto w-fit">Comparison</div>
-          <h1 className="font-display text-4xl md:text-6xl font-extrabold mb-4">
-            See How We <span className="gradient-text">Stack Up</span>
-          </h1>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-14">
+          <div className="tag-pill mb-4">COMPARISON</div>
+          <h1 className="font-display text-4xl md:text-6xl font-bold mb-4 max-w-md">See how we stack up</h1>
           <p className="text-lg text-muted-foreground">No other tool does what LLMClicks does.</p>
         </motion.div>
 
-        <div className="bold-card overflow-x-auto p-0">
+        <div className="rounded-2xl border border-border bg-card overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border">
-                <th className="text-left py-5 px-6 font-display font-bold">Feature</th>
+                <th className="text-left py-4 px-5 font-display font-semibold">Feature</th>
                 {tools.map((t) => (
-                  <th key={t.name} className={`py-5 px-6 font-display font-bold text-center ${t.name === "LLMClicks" ? "gradient-text" : "text-muted-foreground"}`}>
-                    {t.name}
-                  </th>
+                  <th key={t.name} className={`py-4 px-5 font-display font-semibold text-center ${t.name === "LLMClicks" ? "" : "text-muted-foreground"}`}>{t.name}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {features.map((feature, fi) => (
                 <tr key={feature} className="border-b border-border/50 last:border-0">
-                  <td className="py-4 px-6 text-muted-foreground font-medium">{feature}</td>
+                  <td className="py-3.5 px-5 text-muted-foreground">{feature}</td>
                   {tools.map((t) => (
-                    <td key={t.name} className="py-4 px-6"><CellIcon val={t.values[fi]} /></td>
+                    <td key={t.name} className="py-3.5 px-5"><CellIcon val={t.values[fi]} /></td>
                   ))}
                 </tr>
               ))}

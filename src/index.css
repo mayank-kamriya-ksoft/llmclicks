@@ -2,60 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@400;500;600;700;800&display=swap');
 
 @layer base {
   :root {
-    --background: 40 33% 98%;
-    --foreground: 240 20% 12%;
+    --background: 45 30% 97%;
+    --foreground: 30 10% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 240 20% 12%;
+    --card-foreground: 30 10% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 240 20% 12%;
+    --popover-foreground: 30 10% 12%;
 
-    --primary: 262 83% 58%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 30 10% 12%;
+    --primary-foreground: 45 30% 97%;
 
-    --secondary: 40 30% 94%;
-    --secondary-foreground: 240 20% 12%;
+    --secondary: 45 20% 93%;
+    --secondary-foreground: 30 10% 12%;
 
-    --muted: 40 20% 95%;
-    --muted-foreground: 240 10% 46%;
+    --muted: 45 15% 94%;
+    --muted-foreground: 30 5% 45%;
 
-    --accent: 24 95% 60%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 75 85% 60%;
+    --accent-foreground: 30 10% 12%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 40 15% 90%;
-    --input: 40 15% 90%;
-    --ring: 262 83% 58%;
+    --input: 40 15% 88%;
+    --ring: 30 10% 12%;
 
-    --radius: 1rem;
+    --radius: 0.75rem;
 
-    --coral: 12 90% 64%;
-    --coral-soft: 12 85% 72%;
-    --violet: 262 83% 58%;
-    --violet-soft: 262 70% 70%;
-    --sky: 200 90% 58%;
-    --sky-soft: 200 80% 72%;
-    --mint: 160 60% 50%;
-    --mint-soft: 160 50% 68%;
-    --peach: 24 95% 60%;
-    --peach-soft: 24 80% 72%;
-    --cream: 40 33% 98%;
+    --lime: 75 85% 60%;
+    --lime-soft: 75 70% 80%;
+    --warm-gray: 30 5% 45%;
 
     --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 240 20% 12%;
-    --sidebar-primary: 262 83% 58%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 40 30% 94%;
-    --sidebar-accent-foreground: 240 20% 12%;
+    --sidebar-foreground: 30 10% 12%;
+    --sidebar-primary: 30 10% 12%;
+    --sidebar-primary-foreground: 45 30% 97%;
+    --sidebar-accent: 45 20% 93%;
+    --sidebar-accent-foreground: 30 10% 12%;
     --sidebar-border: 40 15% 90%;
-    --sidebar-ring: 262 83% 58%;
+    --sidebar-ring: 30 10% 12%;
   }
 }
 
@@ -66,64 +58,24 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Sora', sans-serif;
   }
 }
 
 @layer utilities {
-  .gradient-text {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(var(--violet)), hsl(var(--coral)));
-  }
-
-  .gradient-text-sky {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(var(--sky)), hsl(var(--violet)));
-  }
-
-  .gradient-bg-primary {
-    background-image: linear-gradient(135deg, hsl(var(--violet)), hsl(var(--coral)));
-  }
-
-  .gradient-bg-soft {
-    background-image: linear-gradient(135deg, hsl(var(--violet-soft) / 0.15), hsl(var(--coral-soft) / 0.15));
-  }
-
-  .gradient-bg-sky {
-    background-image: linear-gradient(135deg, hsl(var(--sky) / 0.1), hsl(var(--violet) / 0.1));
-  }
-
-  .blob-shape {
-    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-  }
-
-  .soft-card {
-    @apply bg-card rounded-2xl border border-border shadow-sm;
-  }
-
-  .bold-card {
-    @apply rounded-3xl p-8 transition-all duration-300;
-    background: linear-gradient(145deg, hsl(0 0% 100%), hsl(var(--cream)));
-    border: 1px solid hsl(var(--border));
-    box-shadow: 0 4px 24px hsl(var(--violet) / 0.06);
-  }
-
-  .bold-card:hover {
-    box-shadow: 0 8px 40px hsl(var(--violet) / 0.12);
-    transform: translateY(-2px);
-  }
-
   .section-padding {
     @apply py-20 md:py-28 px-4;
   }
 
-  .highlight-pill {
-    @apply inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium;
-    background: linear-gradient(135deg, hsl(var(--violet) / 0.1), hsl(var(--coral) / 0.1));
-    color: hsl(var(--violet));
+  .accent-blob {
+    background: radial-gradient(circle, hsl(var(--lime)) 0%, hsl(var(--lime) / 0.3) 40%, transparent 70%);
+  }
+
+  .tag-pill {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-medium uppercase tracking-wider text-muted-foreground;
   }
 }
