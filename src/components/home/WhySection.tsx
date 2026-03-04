@@ -9,6 +9,16 @@ const cards = [
   { icon: FileSearch, num: "04", title: "Optimize for AI discoverability", desc: "Get specific recommendations on structure, semantics, and format.", link: "/features/optimization-wizard" },
 ];
 
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12 } },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30, scale: 0.97 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
+};
+
 const WhySection = () => (
   <section className="section-padding relative overflow-hidden">
     <div className="absolute inset-0 accent-mesh pointer-events-none opacity-50" />
@@ -26,35 +36,34 @@ const WhySection = () => (
         </h2>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        {cards.map((card, i) => (
-          <motion.div
-            key={card.title}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.08 }}
-          >
+      <motion.div
+        className="grid grid-cols-1 md:grid-cols-2 gap-5"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+      >
+        {cards.map((card) => (
+          <motion.div key={card.title} variants={cardVariants}>
             <Link
               to={card.link}
-              className="block rounded-2xl bg-card border border-border p-7 hover:shadow-lg hover:border-accent/20 transition-all group h-full relative overflow-hidden"
+              className="block rounded-2xl bg-card border border-border p-7 hover:shadow-xl hover:border-accent/30 transition-all duration-300 group h-full relative overflow-hidden shimmer-card glow-hover"
             >
-              {/* Number watermark */}
-              <span className="absolute top-4 right-6 font-display text-6xl font-bold text-muted/60 select-none">{card.num}</span>
+              <span className="absolute top-4 right-6 font-display text-6xl font-bold text-muted/60 select-none group-hover:text-accent/10 transition-colors duration-300">{card.num}</span>
               <div className="relative z-10">
-                <div className="mb-4 h-10 w-10 rounded-xl bg-accent/10 flex items-center justify-center">
+                <div className="mb-4 h-10 w-10 rounded-xl bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 group-hover:scale-110 transition-all duration-300">
                   <card.icon className="h-5 w-5 text-accent" />
                 </div>
                 <h3 className="font-display font-bold text-xl mb-2 group-hover:text-foreground transition-colors">{card.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-4">{card.desc}</p>
                 <span className="text-sm font-medium flex items-center gap-1.5 text-accent group-hover:gap-2.5 transition-all">
-                  Explore <ArrowRight className="h-3.5 w-3.5" />
+                  Explore <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </div>
             </Link>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   </section>
 );

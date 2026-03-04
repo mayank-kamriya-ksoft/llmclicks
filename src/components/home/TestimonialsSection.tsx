@@ -26,23 +26,32 @@ const TestimonialsSection = () => (
       <div className="max-w-3xl mx-auto px-12">
         <Carousel opts={{ loop: true }}>
           <CarouselContent>
-            {testimonials.map((t) => (
+            {testimonials.map((t, i) => (
               <CarouselItem key={t.name}>
-                <div className="rounded-2xl border border-border bg-background p-8 md:p-10 relative">
+                <motion.div
+                  className="rounded-2xl border border-border bg-background p-8 md:p-10 relative shimmer-card glow-hover"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                >
                   <Quote className="h-8 w-8 text-accent/20 mb-4" />
                   <p className="text-lg md:text-xl leading-relaxed mb-8 text-foreground">
                     "{t.quote}"
                   </p>
                   <div className="flex items-center gap-4">
-                    <div className="h-11 w-11 rounded-full bg-accent/10 flex items-center justify-center text-sm font-bold text-accent">
+                    <motion.div
+                      className="h-11 w-11 rounded-full bg-accent/10 flex items-center justify-center text-sm font-bold text-accent"
+                      whileHover={{ scale: 1.1 }}
+                    >
                       {t.name.split(" ").map(n => n[0]).join("")}
-                    </div>
+                    </motion.div>
                     <div>
                       <p className="font-display font-semibold text-sm">{t.name}</p>
                       <p className="text-xs text-muted-foreground">{t.role}</p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </CarouselItem>
             ))}
           </CarouselContent>

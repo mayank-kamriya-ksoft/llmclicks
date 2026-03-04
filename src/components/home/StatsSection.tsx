@@ -48,10 +48,10 @@ const StatsSection = () => (
           <motion.div
             key={stat.label}
             className="flex-1 text-center py-8 md:py-0 md:px-8"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
+            transition={{ delay: i * 0.15, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
             <Counter target={stat.value} suffix={stat.suffix} />
             <p className="mt-2 text-muted-foreground text-sm">{stat.label}</p>
