@@ -29,24 +29,28 @@ const FreeToolPage = () => {
   return (
     <Layout>
       <section className="section-padding pt-28 md:pt-36 relative overflow-hidden">
-        <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] accent-blob opacity-40 pointer-events-none" />
+        <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] accent-mesh opacity-30 pointer-events-none" />
+        <div className="absolute top-32 right-16 w-4 h-4 rounded-full bg-accent/20 animate-float pointer-events-none" />
+
         <div className="container mx-auto max-w-3xl relative z-10">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-14">
-            <div className="tag-pill mb-4"><Zap className="h-3 w-3" /> FREE TOOL</div>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-14 text-center">
+            <div className="tag-pill mb-4 mx-auto"><Zap className="h-3 w-3" /> FREE TOOL</div>
             <h1 className="font-display text-4xl md:text-6xl font-bold mb-5">{tool.title}</h1>
-            <p className="text-lg text-muted-foreground max-w-lg">{tool.desc}</p>
+            <p className="text-lg text-muted-foreground max-w-lg mx-auto">{tool.desc}</p>
           </motion.div>
 
-          <motion.div className="rounded-2xl border border-border bg-card p-7" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+          <motion.div className="rounded-2xl border border-border bg-card p-7 shimmer-card gradient-border" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}>
             <div className="space-y-3 mb-7">
               {tool.features.map((f, i) => (
-                <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-secondary/50">
-                  <Check className="h-4 w-4 text-lime shrink-0" />
+                <motion.div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-secondary/50 hover:bg-accent/5 transition-colors" initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 + i * 0.06 }}>
+                  <div className="h-6 w-6 rounded-full bg-accent/15 flex items-center justify-center shrink-0">
+                    <Check className="h-3.5 w-3.5 text-accent" />
+                  </div>
                   <p className="text-sm font-medium">{f}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
-            <Button size="lg" className="w-full rounded-full bg-foreground text-background hover:bg-foreground/90" asChild>
+            <Button size="lg" className="w-full rounded-full bg-accent text-accent-foreground hover:bg-accent/90 glow-hover" asChild>
               <a href="https://app.llmclicks.ai/signup" target="_blank" rel="noopener noreferrer">
                 Try {tool.title} Free <ArrowRight className="ml-2 h-4 w-4" />
               </a>
