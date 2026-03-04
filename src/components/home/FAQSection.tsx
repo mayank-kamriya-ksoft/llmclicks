@@ -19,16 +19,17 @@ const FAQSection = () => (
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
       >
-        <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-          Frequently Asked <span className="gradient-text">Questions</span>
+        <div className="highlight-pill mb-4 mx-auto w-fit">FAQ</div>
+        <h2 className="font-display text-3xl md:text-5xl font-extrabold mb-5">
+          Got <span className="gradient-text">Questions?</span>
         </h2>
       </motion.div>
 
       <Accordion type="single" collapsible className="space-y-3">
         {faqs.map((faq, i) => (
-          <AccordionItem key={i} value={`faq-${i}`} className="glass-card rounded-xl border-none px-6">
-            <AccordionTrigger className="text-left font-semibold hover:no-underline">{faq.q}</AccordionTrigger>
-            <AccordionContent className="text-muted-foreground leading-relaxed">{faq.a}</AccordionContent>
+          <AccordionItem key={i} value={`faq-${i}`} className="bold-card border-none px-8">
+            <AccordionTrigger className="text-left font-display font-bold text-lg hover:no-underline py-5">{faq.q}</AccordionTrigger>
+            <AccordionContent className="text-muted-foreground leading-relaxed text-base pb-6">{faq.a}</AccordionContent>
           </AccordionItem>
         ))}
       </Accordion>

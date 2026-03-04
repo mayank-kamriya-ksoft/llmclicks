@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
 
 const quickLinks = [
   { label: "Home", to: "/" },
@@ -15,7 +16,7 @@ const featureLinks = [
   { label: "AI Query Mapper", to: "/features/ai-query-mapper" },
 ];
 
-const supportLinks = [
+const resourceLinks = [
   { label: "Comparison", to: "/comparison" },
   { label: "AI Readiness Analyzer", to: "/tools/ai-readiness-analyzer" },
   { label: "AI Domain Profiler", to: "/tools/ai-domain-profiler" },
@@ -23,57 +24,71 @@ const supportLinks = [
 ];
 
 const Footer = () => (
-  <footer className="border-t border-border/50 bg-background">
-    <div className="container mx-auto px-4 py-16">
-      <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
-        <div>
-          <div className="flex items-center gap-2 mb-4">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
+  <footer className="bg-foreground text-background">
+    <div className="container mx-auto px-4 py-20">
+      <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-5">
+        <div className="lg:col-span-2">
+          <div className="flex items-center gap-2.5 mb-5">
+            <div className="h-9 w-9 rounded-xl gradient-bg-primary flex items-center justify-center">
               <span className="text-sm font-bold text-primary-foreground">L</span>
             </div>
-            <span className="font-display text-lg font-bold">LLMClicks<span className="text-primary">.ai</span></span>
+            <span className="font-display text-xl font-bold">
+              LLMClicks<span className="opacity-60">.ai</span>
+            </span>
           </div>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            Transform your AI visibility with smarter SEO insights. Understand how LLMs see your brand and optimize accordingly.
+          <p className="text-sm opacity-60 leading-relaxed max-w-sm mb-6">
+            The AI visibility platform that helps you understand how large language models perceive and recommend your brand.
           </p>
+          <a
+            href="https://app.llmclicks.ai/signup"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-background text-foreground px-5 py-2.5 text-sm font-medium hover:opacity-90 transition-opacity"
+          >
+            Get Started Free <ArrowUpRight className="h-4 w-4" />
+          </a>
         </div>
 
         <div>
-          <h4 className="font-display font-semibold mb-4">Quick Links</h4>
-          <ul className="space-y-2">
+          <h4 className="font-display font-semibold mb-5 text-sm uppercase tracking-wider opacity-40">Company</h4>
+          <ul className="space-y-3">
             {quickLinks.map((l) => (
               <li key={l.to}>
-                <Link to={l.to} className="text-sm text-muted-foreground hover:text-primary transition-colors">{l.label}</Link>
+                <Link to={l.to} className="text-sm opacity-60 hover:opacity-100 transition-opacity">{l.label}</Link>
               </li>
             ))}
           </ul>
         </div>
 
         <div>
-          <h4 className="font-display font-semibold mb-4">Features</h4>
-          <ul className="space-y-2">
+          <h4 className="font-display font-semibold mb-5 text-sm uppercase tracking-wider opacity-40">Features</h4>
+          <ul className="space-y-3">
             {featureLinks.map((l) => (
               <li key={l.to}>
-                <Link to={l.to} className="text-sm text-muted-foreground hover:text-primary transition-colors">{l.label}</Link>
+                <Link to={l.to} className="text-sm opacity-60 hover:opacity-100 transition-opacity">{l.label}</Link>
               </li>
             ))}
           </ul>
         </div>
 
         <div>
-          <h4 className="font-display font-semibold mb-4">Resources</h4>
-          <ul className="space-y-2">
-            {supportLinks.map((l) => (
+          <h4 className="font-display font-semibold mb-5 text-sm uppercase tracking-wider opacity-40">Resources</h4>
+          <ul className="space-y-3">
+            {resourceLinks.map((l) => (
               <li key={l.to}>
-                <Link to={l.to} className="text-sm text-muted-foreground hover:text-primary transition-colors">{l.label}</Link>
+                <Link to={l.to} className="text-sm opacity-60 hover:opacity-100 transition-opacity">{l.label}</Link>
               </li>
             ))}
           </ul>
         </div>
       </div>
 
-      <div className="mt-12 border-t border-border/50 pt-8 text-center">
-        <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} LLMClicks.ai. All rights reserved.</p>
+      <div className="mt-16 pt-8 border-t border-background/10 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p className="text-sm opacity-40">&copy; {new Date().getFullYear()} LLMClicks.ai. All rights reserved.</p>
+        <div className="flex items-center gap-6 text-sm opacity-40">
+          <span className="hover:opacity-100 transition-opacity cursor-pointer">Privacy</span>
+          <span className="hover:opacity-100 transition-opacity cursor-pointer">Terms</span>
+        </div>
       </div>
     </div>
   </footer>

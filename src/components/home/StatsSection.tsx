@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 
 const stats = [
-  { value: 95, suffix: "%", label: "Visibility Improvement" },
-  { value: 10000, suffix: "+", label: "Audits Completed" },
-  { value: 500, suffix: "+", label: "Active Users" },
+  { value: 95, suffix: "%", label: "Average Visibility Improvement", color: "bg-violet" },
+  { value: 10000, suffix: "+", label: "Audits Completed", color: "bg-coral" },
+  { value: 500, suffix: "+", label: "Active Users", color: "bg-sky" },
 ];
 
 const Counter = ({ target, suffix }: { target: number; suffix: string }) => {
@@ -39,7 +39,7 @@ const Counter = ({ target, suffix }: { target: number; suffix: string }) => {
   }, [target]);
 
   return (
-    <div ref={ref} className="font-display text-4xl md:text-5xl font-bold text-foreground">
+    <div ref={ref} className="font-display text-5xl md:text-6xl font-extrabold text-foreground">
       {count.toLocaleString()}{suffix}
     </div>
   );
@@ -52,14 +52,15 @@ const StatsSection = () => (
         {stats.map((stat, i) => (
           <motion.div
             key={stat.label}
-            className="text-center"
+            className="bold-card text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.15 }}
           >
+            <div className={`w-12 h-1.5 rounded-full ${stat.color} mx-auto mb-6 opacity-60`} />
             <Counter target={stat.value} suffix={stat.suffix} />
-            <p className="mt-2 text-muted-foreground">{stat.label}</p>
+            <p className="mt-3 text-muted-foreground font-medium">{stat.label}</p>
           </motion.div>
         ))}
       </div>
