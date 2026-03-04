@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Linkedin, Twitter, Facebook, Instagram, Youtube } from "lucide-react";
 
 const cols = [
   {
@@ -41,9 +42,22 @@ const Footer = () => (
             </div>
             <span className="font-display text-lg font-bold">LLMClicks</span>
           </div>
-          <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
-            See how AI assistants talk about your brand, and what you can do about it.
+          <p className="text-sm text-muted-foreground leading-relaxed max-w-xs mb-5">
+            Leveraging cutting-edge AI technologies into your workflow, driving efficiency, innovation, and growth.
           </p>
+          <div className="flex items-center gap-3">
+            {[
+              { icon: Linkedin, href: "https://www.linkedin.com/company/llmclicks-ai/" },
+              { icon: Twitter, href: "https://x.com/llmclicksai" },
+              { icon: Facebook, href: "https://www.facebook.com/llmclicksai" },
+              { icon: Instagram, href: "https://www.instagram.com/llmclicksai/" },
+              { icon: Youtube, href: "https://www.youtube.com/@llmclicksai" },
+            ].map((social) => (
+              <a key={social.href} href={social.href} target="_blank" rel="noopener noreferrer" className="h-8 w-8 rounded-lg border border-border flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent/30 transition-colors">
+                <social.icon className="h-4 w-4" />
+              </a>
+            ))}
+          </div>
         </div>
 
         {cols.map((col) => (

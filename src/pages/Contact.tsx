@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, MapPin, Send, MessageSquare } from "lucide-react";
+import { Mail, MapPin, Phone, Send, MessageSquare } from "lucide-react";
 
 const Contact = () => (
   <Layout>
@@ -35,7 +35,8 @@ const Contact = () => (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="md:col-span-2 space-y-4">
             {[
               { icon: Mail, title: "Email Us", text: "support@llmclicks.ai" },
-              { icon: MapPin, title: "Location", text: "Remote-first, serving clients worldwide." },
+              { icon: Phone, title: "Phone", text: "+91 9822298988" },
+              { icon: MapPin, title: "Address", text: "Pune, Maharashtra, India" },
             ].map((item, i) => (
               <motion.div key={item.title} className="rounded-2xl border border-border bg-card p-6 flex items-start gap-4 shimmer-card" whileHover={{ y: -2 }} transition={{ type: "spring", stiffness: 300 }}>
                 <div className="h-10 w-10 rounded-xl bg-accent/10 flex items-center justify-center shrink-0">
