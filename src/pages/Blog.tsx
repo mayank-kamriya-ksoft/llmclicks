@@ -1,6 +1,6 @@
 import Layout from "@/components/layout/Layout";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BookOpen } from "lucide-react";
 
 const posts = [
   { slug: "ai-visibility-101", title: "AI Visibility 101: Why Your Brand Needs It", excerpt: "Learn the fundamentals of AI visibility and why it's becoming essential.", date: "Feb 15, 2025", tag: "Guide" },
@@ -11,27 +11,34 @@ const posts = [
   { slug: "brand-mentions-in-ai", title: "Understanding Brand Mentions in AI Responses", excerpt: "How AI models decide which brands to mention.", date: "Jan 15, 2025", tag: "Research" },
 ];
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.07, duration: 0.5 } }),
+};
+
 const Blog = () => (
   <Layout>
-    <section className="section-padding pt-28 md:pt-36">
-      <div className="container mx-auto max-w-5xl">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-14">
-          <div className="tag-pill mb-4">BLOG</div>
-          <h1 className="font-display text-4xl md:text-6xl font-bold mb-4 max-w-md">Insights & updates</h1>
+    <section className="section-padding pt-28 md:pt-36 relative overflow-hidden">
+      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] accent-mesh opacity-30 pointer-events-none" />
+      <div className="container mx-auto max-w-5xl relative z-10">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-14 text-center">
+          <div className="tag-pill mb-4 mx-auto"><BookOpen className="h-3 w-3" /> BLOG</div>
+          <h1 className="font-display text-4xl md:text-6xl font-bold mb-4">Insights & updates</h1>
           <p className="text-lg text-muted-foreground">Latest on AI visibility and SEO.</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {posts.map((post, i) => (
-            <motion.article key={post.slug} className="rounded-2xl border border-border bg-card overflow-hidden group cursor-pointer hover:shadow-lg hover:border-foreground/10 transition-all" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}>
-              <div className="h-40 bg-secondary/50 flex items-center justify-center">
-                <span className="tag-pill">{post.tag}</span>
+            <motion.article key={post.slug} className="rounded-2xl border border-border bg-card overflow-hidden group cursor-pointer shimmer-card glow-hover" custom={i} variants={cardVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+              <div className="h-40 bg-secondary/50 flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 accent-mesh opacity-20" />
+                <span className="tag-pill relative z-10">{post.tag}</span>
               </div>
               <div className="p-6">
                 <p className="text-xs text-muted-foreground mb-2">{post.date}</p>
-                <h3 className="font-display font-bold mb-2 group-hover:text-foreground transition-colors">{post.title}</h3>
+                <h3 className="font-display font-bold mb-2 group-hover:text-accent transition-colors">{post.title}</h3>
                 <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{post.excerpt}</p>
-                <span className="text-sm font-medium flex items-center gap-1.5 group-hover:gap-2.5 transition-all">
+                <span className="text-sm font-medium text-accent flex items-center gap-1.5 group-hover:gap-2.5 transition-all">
                   Read more <ArrowRight className="h-3.5 w-3.5" />
                 </span>
               </div>
