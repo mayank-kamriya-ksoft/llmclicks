@@ -313,9 +313,9 @@ const Comparison = () => (
 
     {/* Bottom CTA */}
     <section className="section-padding">
-      <div className="container mx-auto max-w-3xl">
+      <div className="container mx-auto">
         <motion.div
-          className="rounded-3xl p-10 md:p-14 text-center relative overflow-hidden"
+          className="rounded-3xl p-10 md:p-16 lg:p-20 text-center relative overflow-hidden"
           style={{ background: "linear-gradient(145deg, hsl(var(--navy)) 0%, hsl(220 28% 14%) 40%, hsl(180 20% 12%) 100%)" }}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
