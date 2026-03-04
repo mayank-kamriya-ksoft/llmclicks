@@ -34,7 +34,7 @@ const Counter = ({ target, suffix }: { target: number; suffix: string }) => {
   }, [target]);
 
   return (
-    <div ref={ref} className="font-display text-5xl md:text-6xl font-bold">
+    <div ref={ref} className="font-display text-5xl md:text-6xl font-bold text-accent">
       {count.toLocaleString()}{suffix}
     </div>
   );
@@ -43,11 +43,11 @@ const Counter = ({ target, suffix }: { target: number; suffix: string }) => {
 const StatsSection = () => (
   <section className="section-padding">
     <div className="container mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="flex flex-col md:flex-row items-center divide-y md:divide-y-0 md:divide-x divide-border">
         {stats.map((stat, i) => (
           <motion.div
             key={stat.label}
-            className="text-center p-8 rounded-2xl bg-card border border-border"
+            className="flex-1 text-center py-8 md:py-0 md:px-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

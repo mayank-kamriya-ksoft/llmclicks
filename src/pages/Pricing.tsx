@@ -34,7 +34,8 @@ const tiers = [
 const Pricing = () => (
   <Layout>
     <section className="section-padding pt-28 md:pt-36 relative overflow-hidden">
-      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] accent-blob opacity-40 pointer-events-none" />
+      <div className="absolute inset-0 accent-mesh pointer-events-none opacity-40" />
+      <div className="absolute inset-0 grain-overlay pointer-events-none" />
       <div className="container mx-auto relative z-10">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-14">
           <div className="tag-pill mb-4">PRICING</div>
@@ -46,11 +47,16 @@ const Pricing = () => (
           {tiers.map((tier, i) => (
             <motion.div
               key={tier.name}
-              className={`rounded-2xl p-7 flex flex-col ${tier.highlight ? "bg-foreground text-background" : "bg-card border border-border"}`}
+              className={`rounded-2xl p-7 flex flex-col ${tier.highlight ? "bg-foreground text-background relative gradient-border" : "bg-card border border-border"}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
             >
+              {tier.highlight && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <span className="bg-accent text-accent-foreground text-xs font-semibold px-3 py-1 rounded-full">Most Popular</span>
+                </div>
+              )}
               <h3 className="font-display text-lg font-bold mb-1">{tier.name}</h3>
               <p className={`text-sm mb-5 ${tier.highlight ? "opacity-60" : "text-muted-foreground"}`}>{tier.desc}</p>
               <div className="mb-6">
@@ -60,13 +66,13 @@ const Pricing = () => (
               <ul className="space-y-2.5 mb-8 flex-1">
                 {tier.features.map((f) => (
                   <li key={f} className="flex items-start gap-2.5 text-sm">
-                    <Check className={`h-4 w-4 mt-0.5 shrink-0 ${tier.highlight ? "text-lime" : "text-lime"}`} />
+                    <Check className={`h-4 w-4 mt-0.5 shrink-0 ${tier.highlight ? "text-accent" : "text-accent"}`} />
                     <span className={tier.highlight ? "opacity-80" : "text-muted-foreground"}>{f}</span>
                   </li>
                 ))}
               </ul>
               <Button
-                className={`w-full rounded-full ${tier.highlight ? "bg-background text-foreground hover:bg-background/90" : "bg-foreground text-background hover:bg-foreground/90"}`}
+                className={`w-full rounded-xl ${tier.highlight ? "bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg shadow-accent/25" : "bg-foreground text-background hover:bg-foreground/90"}`}
                 asChild
               >
                 <a href="https://app.llmclicks.ai/signup" target="_blank" rel="noopener noreferrer">
