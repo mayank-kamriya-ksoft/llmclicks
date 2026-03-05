@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check } from "lucide-react";
 import { useParams } from "react-router-dom";
+import TrackerDashboardMockup from "@/components/features/TrackerDashboardMockup";
 
 import imgAudit from "@/assets/feature-ai-visibility-audit.jpg";
 import imgTracker from "@/assets/feature-ai-visibility-tracker.jpg";
@@ -61,7 +62,11 @@ const FeaturePage = () => {
           </motion.div>
 
           <motion.div className="rounded-2xl border border-border overflow-hidden mb-12 gradient-border glow-hover" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
-            <img src={feature.image} alt={`${feature.title} dashboard preview`} className="w-full h-auto object-cover" loading="lazy" />
+            {slug === "ai-visibility-tracker" ? (
+              <TrackerDashboardMockup />
+            ) : (
+              <img src={feature.image} alt={`${feature.title} dashboard preview`} className="w-full h-auto object-cover" loading="lazy" />
+            )}
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-4 mb-14">
