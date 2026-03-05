@@ -4,6 +4,11 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Check } from "lucide-react";
 import { useParams } from "react-router-dom";
 import TrackerDashboardMockup from "@/components/features/TrackerDashboardMockup";
+import AuditDashboardMockup from "@/components/features/AuditDashboardMockup";
+import OnPageDashboardMockup from "@/components/features/OnPageDashboardMockup";
+import QueryMapperDashboardMockup from "@/components/features/QueryMapperDashboardMockup";
+import TrafficDashboardMockup from "@/components/features/TrafficDashboardMockup";
+import WizardDashboardMockup from "@/components/features/WizardDashboardMockup";
 
 import imgAudit from "@/assets/feature-ai-visibility-audit.jpg";
 import imgTracker from "@/assets/feature-ai-visibility-tracker.jpg";
@@ -62,11 +67,13 @@ const FeaturePage = () => {
           </motion.div>
 
           <motion.div className="rounded-2xl border border-border overflow-hidden mb-12 gradient-border glow-hover" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
-            {slug === "ai-visibility-tracker" ? (
-              <TrackerDashboardMockup />
-            ) : (
-              <img src={feature.image} alt={`${feature.title} dashboard preview`} className="w-full h-auto object-cover" loading="lazy" />
-            )}
+            {slug === "ai-visibility-audit" ? <AuditDashboardMockup /> :
+             slug === "ai-visibility-tracker" ? <TrackerDashboardMockup /> :
+             slug === "on-page-optimizer" ? <OnPageDashboardMockup /> :
+             slug === "ai-query-mapper" ? <QueryMapperDashboardMockup /> :
+             slug === "llm-traffic-tracker" ? <TrafficDashboardMockup /> :
+             slug === "optimization-wizard" ? <WizardDashboardMockup /> :
+             <img src={feature.image} alt={`${feature.title} dashboard preview`} className="w-full h-auto object-cover" loading="lazy" />}
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-4 mb-14">
