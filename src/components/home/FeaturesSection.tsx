@@ -1,34 +1,34 @@
 import { motion } from "framer-motion";
 import { Eye, BarChart3, TrendingUp, FileText } from "lucide-react";
-import featureAudit from "@/assets/feature-audit.jpg";
-import featureTracker from "@/assets/feature-tracker.jpg";
+import AuditDashboardMockup from "@/components/features/AuditDashboardMockup";
+import TrackerDashboardMockup from "@/components/features/TrackerDashboardMockup";
+import OnPageDashboardMockup from "@/components/features/OnPageDashboardMockup";
 import featureBenchmarks from "@/assets/feature-benchmarks.jpg";
-import featureOnpage from "@/assets/feature-onpage.jpg";
 
 const features = [
   {
     icon: Eye, tag: "MONITORING", title: "AI Visibility Audit",
     desc: "Get a comprehensive audit of how your brand appears across major AI platforms. Understand your AI footprint with detailed scoring and actionable recommendations.",
     metrics: ["Visibility Score", "Competitor Rank", "Citation Count"],
-    image: featureAudit,
+    mockup: "audit",
   },
   {
     icon: BarChart3, tag: "TRACKING", title: "AI Visibility Tracker",
     desc: "Track your brand's visibility across AI models over time. Monitor trends, compare with competitors, and measure the impact of your optimization efforts.",
     metrics: ["Trend Analysis", "Model Coverage", "Weekly Reports"],
-    image: featureTracker,
+    mockup: "tracker",
   },
   {
     icon: TrendingUp, tag: "BENCHMARKS", title: "Industry Benchmarks",
     desc: "Compare your AI visibility against industry standards. Understand where you stand relative to competitors and identify opportunities.",
     metrics: ["Industry Average", "Peer Comparison", "Growth Rate"],
-    image: featureBenchmarks,
+    mockup: null, image: featureBenchmarks,
   },
   {
     icon: FileText, tag: "OPTIMIZATION", title: "On-Page Analysis",
     desc: "Analyze your content for AI-friendliness. Get specific recommendations on structure, semantics, and format to maximize LLM comprehension.",
     metrics: ["Content Score", "Structure Check", "Semantic Analysis"],
-    image: featureOnpage,
+    mockup: "onpage",
   },
 ];
 
@@ -91,12 +91,15 @@ const FeaturesSection = () => (
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <img
-                src={f.image}
-                alt={`${f.title} dashboard mockup`}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
+              {f.mockup === "audit" ? <AuditDashboardMockup /> :
+               f.mockup === "tracker" ? <TrackerDashboardMockup /> :
+               f.mockup === "onpage" ? <OnPageDashboardMockup /> :
+               <img
+                 src={f.image}
+                 alt={`${f.title} dashboard mockup`}
+                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                 loading="lazy"
+               />}
             </motion.div>
           </motion.div>
         ))}
