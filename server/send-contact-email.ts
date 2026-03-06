@@ -1,5 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import nodemailer from "nodemailer";
+import "dotenv/config";
 
 const MAX_NAME_LENGTH = 100;
 const MAX_MESSAGE_LENGTH = 2000;
