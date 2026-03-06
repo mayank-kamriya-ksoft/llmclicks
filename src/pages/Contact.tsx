@@ -45,15 +45,43 @@ const Contact = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
-    toast({ title: "Message sent", description: "We'll get back to you shortly." });
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    setMessage("");
-    setErrors({});
+
+    setIsSubmitting(true);
+    try {
+      const res = await fetch("http://localhost:8080/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: firstName.trim(),
+          lastName: lastName.trim(),
+          email: email.trim(),
+          message: message.trim(),
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast({ title: "Error", description: data.error || "Something went wrong.", variant: "destructive" });
+        return;
+      }
+
+      toast({ title: "Message sent", description: "We'll get back to you shortly." });
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setMessage("");
+      setErrors({});
+    } catch {
+      toast({ title: "Error", description: "Failed to send message. Please try again.", variant: "destructive" });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -95,8 +123,8 @@ const Contact = () => {
               <p className="text-xs text-muted-foreground mt-1 text-right">{message.length}/{MAX_MESSAGE_LENGTH}</p>
               {errors.message && <p className="text-xs text-destructive mt-1" data-testid="error-message">{errors.message}</p>}
             </div>
-            <Button data-testid="button-submit" className="w-full rounded-full bg-accent text-accent-foreground hover:bg-accent/90 glow-hover" type="submit">
-              <Send className="mr-2 h-4 w-4" /> Send Message
+            <Button data-testid="button-submit" className="w-full rounded-full bg-accent text-accent-foreground hover:bg-accent/90 glow-hover" type="submit" disabled={isSubmitting}>
+              <Send className="mr-2 h-4 w-4" /> {isSubmitting ? "Sending..." : "Send Message"}
             </Button>
           </motion.form>
 
