@@ -20,6 +20,7 @@ const Contact = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
   const validate = (): boolean => {
@@ -45,15 +46,13 @@ const Contact = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
     setIsSubmitting(true);
     try {
-      const res = await fetch("http://localhost:8080/api/contact", {
+      const res = await fetch("/api/send-contact-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -64,21 +63,23 @@ const Contact = () => {
         }),
       });
 
-      const data = await res.json();
-
       if (!res.ok) {
-        toast({ title: "Error", description: data.error || "Something went wrong.", variant: "destructive" });
-        return;
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Failed to send message");
       }
 
-      toast({ title: "Message sent", description: "We'll get back to you shortly." });
+      toast({ title: "Message sent!", description: "We'll get back to you shortly." });
       setFirstName("");
       setLastName("");
       setEmail("");
       setMessage("");
       setErrors({});
-    } catch {
-      toast({ title: "Error", description: "Failed to send message. Please try again.", variant: "destructive" });
+    } catch (err: any) {
+      toast({
+        title: "Something went wrong",
+        description: err.message || "Please try again later.",
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -124,7 +125,11 @@ const Contact = () => {
               {errors.message && <p className="text-xs text-destructive mt-1" data-testid="error-message">{errors.message}</p>}
             </div>
             <Button data-testid="button-submit" className="w-full rounded-full bg-accent text-accent-foreground hover:bg-accent/90 glow-hover" type="submit" disabled={isSubmitting}>
-              <Send className="mr-2 h-4 w-4" /> {isSubmitting ? "Sending..." : "Send Message"}
+              {isSubmitting ? (
+                <span className="flex items-center gap-2"><span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" /> Sending...</span>
+              ) : (
+                <><Send className="mr-2 h-4 w-4" /> Send Message</>
+              )}
             </Button>
           </motion.form>
 
