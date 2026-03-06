@@ -24,7 +24,21 @@ const toolData: Record<string, { title: string; desc: string; features: string[]
 
 const FreeToolPage = () => {
   const { slug } = useParams();
-  const tool = toolData[slug || ""] || toolData["ai-readiness-analyzer"];
+  const tool = slug && toolData[slug] ? toolData[slug] : null;
+
+  if (!tool) {
+    return (
+      <Layout>
+        <section className="section-padding pt-28 md:pt-36">
+          <div className="container mx-auto max-w-3xl text-center">
+            <h1 className="font-display text-4xl font-bold mb-4">Tool not found</h1>
+            <p className="text-muted-foreground mb-6">The tool you're looking for doesn't exist.</p>
+            <a href="/" className="text-accent underline hover:text-accent/80">Return to Home</a>
+          </div>
+        </section>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>

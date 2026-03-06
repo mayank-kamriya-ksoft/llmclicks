@@ -1,11 +1,62 @@
 import Layout from "@/components/layout/Layout";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Phone, Send, MessageSquare } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
-const Contact = () => (
+const MAX_NAME_LENGTH = 100;
+const MAX_MESSAGE_LENGTH = 2000;
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const sanitizeInput = (value: string): string =>
+  value.replace(/[<>"'&]/g, "");
+
+const Contact = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const { toast } = useToast();
+
+  const validate = (): boolean => {
+    const newErrors: Record<string, string> = {};
+    const trimmedFirst = firstName.trim();
+    const trimmedLast = lastName.trim();
+    const trimmedEmail = email.trim();
+    const trimmedMessage = message.trim();
+
+    if (!trimmedFirst) newErrors.firstName = "First name is required";
+    else if (trimmedFirst.length > MAX_NAME_LENGTH) newErrors.firstName = `Max ${MAX_NAME_LENGTH} characters`;
+
+    if (!trimmedLast) newErrors.lastName = "Last name is required";
+    else if (trimmedLast.length > MAX_NAME_LENGTH) newErrors.lastName = `Max ${MAX_NAME_LENGTH} characters`;
+
+    if (!trimmedEmail) newErrors.email = "Email is required";
+    else if (!EMAIL_REGEX.test(trimmedEmail)) newErrors.email = "Please enter a valid email";
+
+    if (!trimmedMessage) newErrors.message = "Message is required";
+    else if (trimmedMessage.length > MAX_MESSAGE_LENGTH) newErrors.message = `Max ${MAX_MESSAGE_LENGTH} characters`;
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validate()) return;
+    toast({ title: "Message sent", description: "We'll get back to you shortly." });
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setMessage("");
+    setErrors({});
+  };
+
+  return (
   <Layout>
     <section className="section-padding pt-28 md:pt-36 relative overflow-hidden">
       <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] accent-mesh opacity-30 pointer-events-none" />
@@ -20,14 +71,31 @@ const Contact = () => (
         </motion.div>
 
         <div className="grid md:grid-cols-5 gap-6">
-          <motion.form className="md:col-span-3 rounded-2xl border border-border bg-card p-7 space-y-5 shimmer-card gradient-border" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} onSubmit={(e) => e.preventDefault()}>
+          <motion.form className="md:col-span-3 rounded-2xl border border-border bg-card p-7 space-y-5 shimmer-card gradient-border" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} onSubmit={handleSubmit} noValidate>
             <div className="grid grid-cols-2 gap-4">
-              <div><label className="text-sm font-medium mb-1.5 block">First Name</label><Input placeholder="John" className="rounded-xl" /></div>
-              <div><label className="text-sm font-medium mb-1.5 block">Last Name</label><Input placeholder="Doe" className="rounded-xl" /></div>
+              <div>
+                <label htmlFor="contact-first-name" className="text-sm font-medium mb-1.5 block">First Name</label>
+                <Input id="contact-first-name" data-testid="input-first-name" placeholder="John" className="rounded-xl" value={firstName} onChange={(e) => setFirstName(sanitizeInput(e.target.value))} maxLength={MAX_NAME_LENGTH} autoComplete="given-name" />
+                {errors.firstName && <p className="text-xs text-destructive mt-1" data-testid="error-first-name">{errors.firstName}</p>}
+              </div>
+              <div>
+                <label htmlFor="contact-last-name" className="text-sm font-medium mb-1.5 block">Last Name</label>
+                <Input id="contact-last-name" data-testid="input-last-name" placeholder="Doe" className="rounded-xl" value={lastName} onChange={(e) => setLastName(sanitizeInput(e.target.value))} maxLength={MAX_NAME_LENGTH} autoComplete="family-name" />
+                {errors.lastName && <p className="text-xs text-destructive mt-1" data-testid="error-last-name">{errors.lastName}</p>}
+              </div>
             </div>
-            <div><label className="text-sm font-medium mb-1.5 block">Email</label><Input type="email" placeholder="john@example.com" className="rounded-xl" /></div>
-            <div><label className="text-sm font-medium mb-1.5 block">Message</label><Textarea placeholder="Tell us about your needs..." className="rounded-xl min-h-[120px]" /></div>
-            <Button className="w-full rounded-full bg-accent text-accent-foreground hover:bg-accent/90 glow-hover">
+            <div>
+              <label htmlFor="contact-email" className="text-sm font-medium mb-1.5 block">Email</label>
+              <Input id="contact-email" data-testid="input-email" type="email" placeholder="john@example.com" className="rounded-xl" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" />
+              {errors.email && <p className="text-xs text-destructive mt-1" data-testid="error-email">{errors.email}</p>}
+            </div>
+            <div>
+              <label htmlFor="contact-message" className="text-sm font-medium mb-1.5 block">Message</label>
+              <Textarea id="contact-message" data-testid="input-message" placeholder="Tell us about your needs..." className="rounded-xl min-h-[120px]" value={message} onChange={(e) => setMessage(sanitizeInput(e.target.value))} maxLength={MAX_MESSAGE_LENGTH} />
+              <p className="text-xs text-muted-foreground mt-1 text-right">{message.length}/{MAX_MESSAGE_LENGTH}</p>
+              {errors.message && <p className="text-xs text-destructive mt-1" data-testid="error-message">{errors.message}</p>}
+            </div>
+            <Button data-testid="button-submit" className="w-full rounded-full bg-accent text-accent-foreground hover:bg-accent/90 glow-hover" type="submit">
               <Send className="mr-2 h-4 w-4" /> Send Message
             </Button>
           </motion.form>
@@ -53,6 +121,7 @@ const Contact = () => (
       </div>
     </section>
   </Layout>
-);
+  );
+};
 
 export default Contact;

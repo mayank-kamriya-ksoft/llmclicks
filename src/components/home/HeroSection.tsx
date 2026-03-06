@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check, Sparkles } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import DashboardMockup from "./DashboardMockup";
 import TrustedByMarquee from "./TrustedByMarquee";
 import HeroVisual from "./HeroVisual";
@@ -15,13 +15,12 @@ const HeroSection = () => {
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
-  // Rotate words
-  useState(() => {
+  useEffect(() => {
     const interval = setInterval(() => {
       setWordIndex((i) => (i + 1) % words.length);
     }, 3000);
     return () => clearInterval(interval);
-  });
+  }, []);
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden pt-28 md:pt-36 pb-12 px-4">
@@ -99,8 +98,11 @@ const HeroSection = () => {
               <input
                 type="url"
                 value={url}
-                onChange={(e) => setUrl(e.target.value)}
+                onChange={(e) => setUrl(e.target.value.replace(/[<>"']/g, ""))}
                 placeholder="Enter your website URL"
+                maxLength={2048}
+                autoComplete="url"
+                data-testid="input-url"
                 className="flex-1 rounded-xl border border-border bg-card px-5 py-3 text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent/40 transition-all"
               />
               <Button className="rounded-xl bg-accent text-accent-foreground hover:bg-accent/90 px-6 py-3 whitespace-nowrap shadow-lg shadow-accent/20 group" asChild>
